@@ -1,0 +1,52 @@
+{% load static %}
+<!-- Navbar -->
+<div class="container position-sticky z-index-sticky top-0">
+  <div class="row">
+    <div class="col-12">
+      <nav
+        class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-fixed shadow-sm position-absolute my-3 py-2 start-0 end-0 mx-4">
+        <div class="container-fluid px-0">
+          <a class="navbar-brand font-weight-bolder ms-sm-3" href="{% url 'cafe_kitchen:index' %}">My kitchen</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon mt-2">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+          </span>
+          </button>
+
+          {% if request.user.is_authenticated %}
+          <div class="collapse navbar-collapse justify-content-center w-100" id="navigation">
+            <ul class="navbar-nav navbar-nav-hover justify-content-center w-100">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'cafe_kitchen:cooks' %}">Cooks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'cafe_kitchen:dishes' %}">Dishes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'cafe_kitchen:types-of-dish'%} ">Types of dishes</a>
+              </li>
+              </ul>
+          </div>
+
+          <div class="row text-center">
+            <div class="col-12 mx-auto">
+              <a href="{{ user.get_absolute_url }}" class="btn bg-gradient-info w-auto me-1 mb-0">
+                {{ user.username }}
+              </a>
+            </div>
+          </div>
+          {% else %}
+            <div class="row text-center">
+              <div class="col-12 mx-auto">
+                <a href="{% url 'login' %}" class="btn bg-gradient-info w-auto me-1 mb-0">Login</a>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </nav>
+      <!-- End Navbar -->
+    </div>
+  </div>
+</div>

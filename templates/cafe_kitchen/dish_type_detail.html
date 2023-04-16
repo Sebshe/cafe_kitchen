@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ dishtype.name }} {% endblock title %}
+
+{% block body %} class="blog-author bg-gray-100" {% endblock body %}
+
+{% block header %}
+
+  {% with cook=request.user %}
+    {% include 'includes/navigation.html' %}
+  {% endwith %}
+
+{% endblock header %}
+
+{% block content %}
+
+  <!-- START Testimonials w/ user image & text & info -->
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="row py-lg-7 py-5">
+            <div class="col-lg-3 col-md-5 position-relative my-auto">
+              <img class="img border-radius-lg max-width-300 w-100 position-relative z-index-2" src="{{ object.image.url }}" alt="{{ dishtype.name }}">
+            </div>
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="mb-0">{{ dishtype.name}}</h4>
+                <div class="d-block">
+                  <a href="{% url 'cafe_kitchen:type-of-dish-update' pk=dishtype.id %}" class="btn btn-outline-info text-nowrap mb-0">Change</a>
+                  <a href="{% url 'cafe_kitchen:type-of-dish-delete' pk=dishtype.id %}" class="btn btn-danger text-nowrap mb-0">Delete</a>
+                </div>
+              </div>
+              <p class="text-lg mb-0">
+                {{ dishtype.description }}
+              </p>
+            </div>
+
+            <div class="container">
+              {% if dishtype.dishes.all %}
+                <table class="table table-sm table-dark">
+                  <thead>
+                    <tr>
+                      <th class="text-center">ID</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Detail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for dish in dishtype.dishes.all %}
+                    <tr>
+                      <th class="text-center">{{ dish.id }}  </th>
+                      <th class="text-center">{{ dish.name }}  </th>
+                      <th class="text-center"> <a href="#" class="btn btn-primary w-auto me-1 mb-0">Detail</a></th>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+                <div class="col-lg-7 text-center mx-auto">
+                  <p class="lead text-muted mt-3">No dish types have been added yet</p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END Testimonials w/ user image & text & info -->
+
+
+
+
+  {% endblock content %}

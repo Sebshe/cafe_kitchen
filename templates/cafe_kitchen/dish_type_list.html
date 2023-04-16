@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block title %} Home kitchen {% endblock title %}
+
+{% block body %} class="index-page bg-gray-200" {% endblock body %}
+
+{% block content %}
+
+<header class="header-2">
+  <div class="page-header min-vh-75 relative py-xl-8" style="background-image: url('{% static 'img/curved-images/curved.jpg' %}')">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 text-center mx-auto">
+          <h1 class="text-white pt-3 mt-n5">Types of dish</h1>
+          <p class="lead text-white mt-3"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam corporis deserunt dolor, doloremque ducimus error fugit molestiae natus officiis omnis quaerat quibusdam voluptates! Aliquid facilis fugit laboriosam omnis optio.</span><span>A, consectetur consequuntur delectus deserunt dignissimos dolorem doloremque earum eligendi fugit hic iure laborum laudantium maiores minus nostrum numquam officiis omnis optio placeat provident, quis saepe sint soluta temporibus voluptatum.</span></p>
+          <form action="" method="get" class="form-inline">
+            {{ search_form.name|as_crispy_field }}
+            <button type="submit" class="btn btn-secondary"><span id="search-icon" ><i class="fas fa-search"></i> Search</span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="position-absolute w-100 z-index-1 bottom-0">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="moving-waves">
+          <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+          <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+          <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+          <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="pt-3 pb-4">
+  <div class="container">
+  <a href="{% url 'cafe_kitchen:types-of-dish-create' %}" class="btn btn-primary w-auto me-1 mb-0">+ Add type</a>
+
+  {% if dishtype_list %}
+    <table class="table table-sm table-dark">
+      <thead>
+        <tr>
+          <th class="text-center">ID</th>
+          <th class="text-center">Name</th>
+          <th class="text-center">Number of dishes</th>
+          <th class="text-center">Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for dishtype in dishtype_list %}
+        <tr>
+          <th class="text-center">{{ dishtype.id }}  </th>
+          <th class="text-center">{{ dishtype.name }}  </th>
+          <th class="text-center">{{ dishtype.num_dishes }}  </th>
+          <th class="text-center"> <a href="{% url 'cafe_kitchen:type-of-dish-detail' pk=dishtype.id %}" class="btn btn-primary w-auto me-1 mb-0">Detail</a></th>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="col-lg-7 text-center mx-auto">
+      <p class="lead text-muted mt-3">No dish types have been added yet</p>
+    </div>
+  {% endif %}
+</section>
+
+{% endblock %}

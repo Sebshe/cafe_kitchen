@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %} Delete type of dish {% endblock title %}
+{% block body %} class="contact-us"  {% endblock body %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
+
+{% block content %}
+
+
+  <header>
+    <div class="page-header min-vh-85">
+      <div>
+        <img class="position-absolute fixed-top ms-auto w-50 h-100 z-index-0 d-none d-sm-none d-md-block border-radius-section border-top-end-radius-0 border-top-start-radius-0 border-bottom-end-radius-0" src="{% static 'img/curved-images/curved8.jpg' %}" alt="image">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 d-flex justify-content-center flex-column">
+            <div class="alert alert-danger text-white font-weight-bold d-flex blur justify-content-center p-4 shadow-lg my-sm-0 my-sm-6 mt-8 mb-5" role="alert">
+              <div class="text-center">
+                <h3 class="text-white">Attention warning</h3>
+                <p class="mb-0">
+                  Are you sure?
+                </p>
+              </div>
+            </div>
+            <div class="text-center">
+              <form action="" method="post">
+                {% csrf_token %}
+
+                <a href="{% url 'cafe_kitchen:dishes' %}" class="btn btn-lg bg-gradient-success w-auto me-1 mb-0">Go to all dish</a>
+                <input type="submit" value="Delete" class="btn btn-sm btn-danger text-nowrap mb-0">
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+{% endblock content %}
